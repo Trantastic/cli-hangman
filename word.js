@@ -2,11 +2,11 @@ var wordBank = ["finn the human", "jake the dog", "adventure time", "card wars",
 
 var Word = function() {
 	this.randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-	this.blankSpaces = function() {
-		var arr = this.randomWord.split("");
+	this.blankSpaces = function(word) {
+		var arr = word.split("");
 		var blankHolder = [];
 
-		for(var i = 0; i < this.randomWord.length; i++) {
+		for(var i = 0; i < word.length; i++) {
 			if(arr[i] !== " ") {
 				blankHolder.push("_");
 			} else {
@@ -14,6 +14,10 @@ var Word = function() {
 			}
 		}
 		console.log(blankHolder.join(""));
+	}
+	this.letterGuessed = function(letter) {
+		var letterFound = false;
+		this.arr
 	}
 }
 

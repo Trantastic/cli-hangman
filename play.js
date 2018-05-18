@@ -1,1 +1,0 @@
-this.randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
