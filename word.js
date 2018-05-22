@@ -17,6 +17,7 @@ var Word = function() {
 				blankHolder.push("_");
 			} else {
 				blankHolder.push(" ");
+				this.correctLetters.push(" ");
 			}
 		}
 		console.log(blankHolder.join(""));
