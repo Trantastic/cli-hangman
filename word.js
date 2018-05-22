@@ -1,7 +1,9 @@
 var wordBank = ["finn the human", "jake the dog", "adventure time", "card wars", "everything burrito", "lumpy space princess", "oh my glob"];
 
 var Word = function() {
+	// Selects random word from wordBank
 	this.randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+	// Replaces selected random word with underscores and prints it
 	this.blankSpaces = function(word) {
 		var arr = word.split("");
 		var blankHolder = [];
@@ -14,10 +16,6 @@ var Word = function() {
 			}
 		}
 		console.log(blankHolder.join(""));
-	}
-	this.letterGuessed = function(letter) {
-		var letterFound = false;
-		this.arr
 	}
 }
 
