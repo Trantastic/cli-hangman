@@ -1,16 +1,10 @@
-// Feed this function into game.js where inquirer is getting user input
-
 function Score() {
-	this.guessLeft = 20;
-	this.lose = false;
-	this.win = false;
-
-	this.tracker = function() {
-		if(this.lose) {
-			console.log("No more guesses. You lost!");
-		}
-		else if(this.win) {
+	this.tracker = function(win) {
+		if(win) {
 			console.log("Great job! You guessed all of them right!");
+			
+		} else {
+			console.log("No more guesses. You lost!");
 		}
 	}
 }
