@@ -12,13 +12,13 @@ var Play = function() {
 
 	this.initiate = function() {
 		this.letterArr = newWord.correctLetters;
+		this.userGuesses = [];
+		this.chosenWords = [];
 		this.guessesLeft = 20;
 		this.selectWord();
 	};
 
 	this.selectWord = function() {
-		this.chosenWords = [];
-
 		if(this.chosenWords.length === 7) {
 			newScore(true);
 			this.playAgain();
@@ -43,12 +43,12 @@ var Play = function() {
 			if(this.guessesLeft < 1) {
 				newScore(false);
 				console.log("The phrase was:", currentWord);
+				this.playAgain();
 			}
 		});
 	}
 
 	this.askForGuess = function() {
-		var userGuesses = [];
 		var currentWordArr = currentWord.split("");
 
 		return inquirer.prompt([
@@ -58,25 +58,30 @@ var Play = function() {
 				message: "Guess a letter"
 			}
 		]).then(function(input) {
-			userGuesses.push(input.choice);
-			console.log(userGuesses);
+			self.userGuesses.push(input.choice);
+			console.log(self.userGuesses);
 
 			if(!currentWordArr.includes(input.choice)) {
 				self.guessesLeft--;
 				console.log("Guesses Left:", self.guessesLeft);
 				console.log("Incorrect!");
 				self.userGuess();
+				newWord.blankSpaces(currentWord);
 			} else {
 				console.log("Correct!");
 				self.letterArr.push(input.choice);
 				self.reprint();
-				self.askForGuess();
 			}
 		});
 	}
 
 	this.reprint = function() {
+		if(this.letterArr.length === currentWord.length) {
+			this.selectWord();
+		} else {
 		newWord.blankSpaces(currentWord);
+		this.askForGuess();
+		}
 	}
 
 	this.playAgain = function() {
