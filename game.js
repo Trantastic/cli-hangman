@@ -59,16 +59,16 @@ var Play = function() {
 			}
 		]).then(function(input) {
 			self.userGuesses.push(input.choice);
-			console.log(self.userGuesses);
+			console.log("\nLetters Guessed: " + self.userGuesses + "\n");
 
 			if(!currentWordArr.includes(input.choice)) {
 				self.guessesLeft--;
 				console.log("Guesses Left:", self.guessesLeft);
-				console.log("Incorrect!");
+				console.log("Incorrect!\n");
 				self.userGuess();
 				newWord.blankSpaces(currentWord);
 			} else {
-				console.log("Correct!");
+				console.log("Correct!\n");
 				self.letterArr.push(input.choice);
 				self.reprint();
 			}

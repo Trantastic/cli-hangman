@@ -20,7 +20,7 @@ var Word = function() {
 				this.correctLetters.push(" ");
 			}
 		}
-		console.log(blankHolder.join(""));
+		console.log(blankHolder.join("") + "\n");
 	}
 }
 
