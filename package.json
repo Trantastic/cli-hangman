@@ -1,0 +1,23 @@
+{
+  "name": "cli-hangman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "dependencies": {
+    "inquirer": "^5.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trantastic/cli-hangman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trantastic/cli-hangman/issues"
+  },
+  "homepage": "https://github.com/Trantastic/cli-hangman#readme"
+}
