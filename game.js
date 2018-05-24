@@ -11,20 +11,23 @@ var Play = function() {
 	var currentWord;
 
 	this.initiate = function() {
+		this.nextWord = false;
 		this.letterArr = newWord.correctLetters;
-		this.userGuesses = [];
 		this.chosenWords = [];
 		this.guessesLeft = 20;
 		this.selectWord();
 	};
 
 	this.selectWord = function() {
+		this.userGuesses = [];
+
+		// If player has guessed all the words, ask if they want to play again
 		if(this.chosenWords.length === 7) {
-			newScore(true);
+			newScore.tracker.tracker(true);
 			this.playAgain();
 		}
 		
-		var newRanWord = newWord.randomWord;
+		var newRanWord = newWord.randomWord();
 		
 		if(!this.chosenWords.includes(newRanWord)) {
 			this.chosenWords.push(newRanWord);
@@ -35,19 +38,17 @@ var Play = function() {
 		}
 
 		currentWord = this.chosenWords[this.chosenWords.length - 1];
-		this.userGuess();
+		this.askForGuess();
 	};
 
+	// If player runs out of guesses (loses), prints the whole phrase
 	this.userGuess = function() {
-		this.askForGuess().then(function() {
-			if(this.guessesLeft < 1) {
-				newScore(false);
-				console.log("The phrase was:", currentWord);
-				this.playAgain();
-			}
-		});
+		newScore.tracker(false);
+		console.log("The phrase was:", currentWord);
+		this.playAgain();
 	}
 
+	// Prompts user for to guess a letter and checks if it's incorrect or correct
 	this.askForGuess = function() {
 		var currentWordArr = currentWord.split("");
 
@@ -63,24 +64,39 @@ var Play = function() {
 
 			if(!currentWordArr.includes(input.choice)) {
 				self.guessesLeft--;
+
+				if(self.guessesLeft === 0) {
+					return self.userGuess();
+				}
+
 				console.log("Guesses Left:", self.guessesLeft);
 				console.log("Incorrect!\n");
-				self.userGuess();
+
 				newWord.blankSpaces(currentWord);
+				self.askForGuess();
 			} else {
 				console.log("Correct!\n");
+
 				self.letterArr.push(input.choice);
+
+				if(currentWordArr.length === currentWord.length) {
+					self.nextWord = true;
+				}
+
 				self.reprint();
 			}
 		});
 	}
 
 	this.reprint = function() {
-		if(this.letterArr.length === currentWord.length) {
+		if(this.nextWord) {
+			this.nextWord = false;
+			currentWord = "";
+			this.letterArr = [];
 			this.selectWord();
 		} else {
-		newWord.blankSpaces(currentWord);
-		this.askForGuess();
+			newWord.blankSpaces(currentWord);
+			this.askForGuess();
 		}
 	}
 

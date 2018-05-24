@@ -2,7 +2,9 @@ var wordBank = ["finn the human", "jake the dog", "adventure time", "card wars",
 
 var Word = function() {
 	// Selects random word from wordBank
-	this.randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+	this.randomWord = function() {
+		return wordBank[Math.floor(Math.random() * wordBank.length)];
+	}
 	// Replaces selected random word with underscores and prints it
 	this.correctLetters = [];
 	this.blankSpaces = function(word) {
@@ -20,7 +22,7 @@ var Word = function() {
 				this.correctLetters.push(" ");
 			}
 		}
-		console.log(blankHolder.join("") + "\n");
+		console.log("\n" + blankHolder.join("") + "\n");
 	}
 }
 
