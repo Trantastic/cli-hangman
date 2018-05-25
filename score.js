@@ -6,7 +6,7 @@ function Score() {
 		} else {
 			console.log("No more guesses. You lost!");
 		}
-	}
+	};
 }
 
 module.exports = Score;

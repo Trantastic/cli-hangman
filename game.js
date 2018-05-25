@@ -46,7 +46,7 @@ var Play = function() {
 		newScore.tracker(false);
 		console.log("The phrase was:", currentWord);
 		this.playAgain();
-	}
+	};
 
 	// Prompts user for to guess a letter and checks if it's incorrect or correct
 	this.askForGuess = function() {
@@ -86,7 +86,7 @@ var Play = function() {
 				self.reprint();
 			}
 		});
-	}
+	};
 
 	this.reprint = function() {
 		if(this.nextWord) {
@@ -98,7 +98,7 @@ var Play = function() {
 			newWord.blankSpaces(currentWord);
 			this.askForGuess();
 		}
-	}
+	};
 
 	this.playAgain = function() {
 		return inquirer.prompt([
@@ -115,7 +115,7 @@ var Play = function() {
 				process.exit();
 			}
 		})
-	}
+	};
 }
 
 module.exports = Play;

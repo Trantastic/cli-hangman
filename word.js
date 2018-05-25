@@ -4,7 +4,7 @@ var Word = function() {
 	// Selects random word from wordBank
 	this.randomWord = function() {
 		return wordBank[Math.floor(Math.random() * wordBank.length)];
-	}
+	};
 	// Replaces selected random word with underscores and prints it
 	this.correctLetters = [];
 	this.blankSpaces = function(word) {
@@ -23,7 +23,7 @@ var Word = function() {
 			}
 		}
 		console.log("\n" + blankHolder.join("") + "\n");
-	}
+	};
 }
 
 module.exports = Word;
