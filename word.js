@@ -7,6 +7,8 @@ var Word = function() {
 	};
 	// Replaces selected random word with underscores and prints it
 	this.correctLetters = [];
+	// Tracks if whole phrase has been guessed
+	this.nextWord = false;
 	this.blankSpaces = function(word) {
 		var arr = word.split("");
 		var blankHolder = [];
@@ -14,12 +16,16 @@ var Word = function() {
 		for(var i = 0; i < word.length; i++) {
 			if(this.correctLetters.includes(arr[i])) {
 				blankHolder.push(arr[i]);
+
+				if(blankHolder.length === arr.length) {
+					this.nextWord = true;
+				}
 			}
 			else if(arr[i] !== " ") {
 				blankHolder.push("_");
-			} else {
+			} 
+			else {
 				blankHolder.push(" ");
-				this.correctLetters.push(" ");
 			}
 		}
 		console.log("\n" + blankHolder.join("") + "\n");

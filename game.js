@@ -7,11 +7,12 @@ var Score = require("./score.js");
 var newScore = new Score();
 
 var Play = function() {
+	// Assigning this to a variable because inquirer does weird things when using "this"
 	var self = this;
 	var currentWord;
 
 	this.initiate = function() {
-		this.nextWord = false;
+		newWord.nextWord = false;
 		this.letterArr = newWord.correctLetters;
 		this.chosenWords = [];
 		this.guessesLeft = 20;
@@ -78,20 +79,16 @@ var Play = function() {
 				console.log("Correct!\n");
 
 				self.letterArr.push(input.choice);
-
-				if(currentWordArr.length === currentWord.length) {
-					self.nextWord = true;
-				}
-
 				self.reprint();
 			}
 		});
 	};
 
 	this.reprint = function() {
-		if(this.nextWord) {
-			this.nextWord = false;
+		if(newWord.nextWord) {
+			newWord.nextWord = false;
 			currentWord = "";
+			this.userGuesses = [];
 			this.letterArr = [];
 			this.selectWord();
 		} else {
