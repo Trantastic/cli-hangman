@@ -17,7 +17,9 @@ var Word = function() {
 			if(this.correctLetters.includes(arr[i])) {
 				blankHolder.push(arr[i]);
 
-				if(blankHolder.length === arr.length) {
+				if(!blankHolder.includes("_")) {
+					console.log("blankHolder", blankHolder);
+
 					this.nextWord = true;
 				}
 			}

@@ -30,23 +30,18 @@ var Play = function() {
 		
 		var newRanWord = newWord.randomWord();
 		
+		// If word has not been chosen yet push into chosenWords arr
 		if(!this.chosenWords.includes(newRanWord)) {
 			this.chosenWords.push(newRanWord);
 			newWord.blankSpaces(newRanWord);
 		}
+		// If word has already been chosen, pick a new word
 		else {
 			this.selectWord();
 		}
 
 		currentWord = this.chosenWords[this.chosenWords.length - 1];
 		this.askForGuess();
-	};
-
-	// If player runs out of guesses (loses), prints the whole phrase
-	this.userGuess = function() {
-		newScore.tracker(false);
-		console.log("The phrase was:", currentWord);
-		this.playAgain();
 	};
 
 	// Prompts user for to guess a letter and checks if it's incorrect or correct
@@ -82,6 +77,13 @@ var Play = function() {
 				self.reprint();
 			}
 		});
+	};
+
+	// If player runs out of guesses (loses), prints the whole phrase
+	this.userGuess = function() {
+		newScore.tracker(false);
+		console.log("The phrase was:", currentWord);
+		this.playAgain();
 	};
 
 	this.reprint = function() {
