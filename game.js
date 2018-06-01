@@ -47,6 +47,7 @@ var Play = function() {
 	// Prompts user for to guess a letter and checks if it's incorrect or correct
 	this.askForGuess = function() {
 		var currentWordArr = currentWord.split("");
+		console.log(this.chosenWords);
 
 		return inquirer.prompt([
 			{
@@ -66,12 +67,12 @@ var Play = function() {
 				}
 
 				console.log("Guesses Left:", self.guessesLeft);
-				console.log("Incorrect!\n");
+				console.log("Incorrect! Try again.\n");
 
 				newWord.blankSpaces(currentWord);
 				self.askForGuess();
 			} else {
-				console.log("Correct!\n");
+				console.log("Mathemathical! You got it right.\n");
 
 				self.letterArr.push(input.choice);
 				self.reprint();
@@ -87,18 +88,21 @@ var Play = function() {
 	};
 
 	this.reprint = function() {
+		// Resets variables if word has been guessed correctly
 		if(newWord.nextWord) {
 			newWord.nextWord = false;
 			currentWord = "";
 			this.userGuesses = [];
 			this.letterArr = [];
 			this.selectWord();
+		// Reprints word with already correctly guessed letters
 		} else {
 			newWord.blankSpaces(currentWord);
 			this.askForGuess();
 		}
 	};
 
+	// Prompts user if they want to play again
 	this.playAgain = function() {
 		return inquirer.prompt([
 			{
@@ -113,7 +117,7 @@ var Play = function() {
 				console.log("Goodbye");
 				process.exit();
 			}
-		})
+		});
 	};
 }
 
