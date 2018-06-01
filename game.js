@@ -12,7 +12,6 @@ var Play = function() {
 	var currentWord;
 
 	this.initiate = function() {
-		// newWord.nextWord = false;
 		this.letterArr = newWord.correctLetters;
 		this.chosenWords = [];
 		this.userGuesses = [];
@@ -21,9 +20,6 @@ var Play = function() {
 	};
 
 	this.selectWord = function() {
-		// this.userGuesses = [];
-		// newWord.blankHolder = [];
-
 		// If player has guessed all the words, ask if they want to play again
 		if(this.chosenWords.length === 7) {
 			newScore.tracker.tracker(true);
@@ -95,19 +91,17 @@ var Play = function() {
 
 	this.reprint = function() {
 		var noSpaces = currentWord.split("").join("");
+
 		// Resets variables if word has been guessed correctly
 		if(this.letterArr.length === noSpaces.length) {
-		// if(!newWord.blankHolder.includes("_")) {
-			// newWord.nextWord = false;
 			currentWord = "";
-			this.userGuesses = [];
+			newWord.correctLetters = [];
 			this.letterArr = [];
 			this.selectWord();
 			console.log("currentWord", currentWord);
 		} 
 		// Reprints word with already correctly guessed letters
 		else {
-			// newWord.blankHolder = [];
 			newWord.blankSpaces(currentWord);
 			this.askForGuess();
 		}
