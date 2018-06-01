@@ -12,15 +12,17 @@ var Play = function() {
 	var currentWord;
 
 	this.initiate = function() {
-		newWord.nextWord = false;
+		// newWord.nextWord = false;
 		this.letterArr = newWord.correctLetters;
 		this.chosenWords = [];
+		this.userGuesses = [];
 		this.guessesLeft = 20;
 		this.selectWord();
 	};
 
 	this.selectWord = function() {
-		this.userGuesses = [];
+		// this.userGuesses = [];
+		// newWord.blankHolder = [];
 
 		// If player has guessed all the words, ask if they want to play again
 		if(this.chosenWords.length === 7) {
@@ -47,7 +49,6 @@ var Play = function() {
 	// Prompts user for to guess a letter and checks if it's incorrect or correct
 	this.askForGuess = function() {
 		var currentWordArr = currentWord.split("");
-		console.log(this.chosenWords);
 
 		return inquirer.prompt([
 			{
@@ -74,7 +75,12 @@ var Play = function() {
 			} else {
 				console.log("Mathemathical! You got it right.\n");
 
-				self.letterArr.push(input.choice);
+				for(var i = 0; i < currentWord.length; i++) {
+					if(input.choice === currentWordArr[i]) {
+						self.letterArr.push(input.choice);
+					}
+				}
+
 				self.reprint();
 			}
 		});
@@ -88,15 +94,20 @@ var Play = function() {
 	};
 
 	this.reprint = function() {
+		var noSpaces = currentWord.split("").join("");
 		// Resets variables if word has been guessed correctly
-		if(newWord.nextWord) {
-			newWord.nextWord = false;
+		if(this.letterArr.length === noSpaces.length) {
+		// if(!newWord.blankHolder.includes("_")) {
+			// newWord.nextWord = false;
 			currentWord = "";
 			this.userGuesses = [];
 			this.letterArr = [];
 			this.selectWord();
+			console.log("currentWord", currentWord);
+		} 
 		// Reprints word with already correctly guessed letters
-		} else {
+		else {
+			// newWord.blankHolder = [];
 			newWord.blankSpaces(currentWord);
 			this.askForGuess();
 		}
