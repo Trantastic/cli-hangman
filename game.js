@@ -77,8 +77,6 @@ var Play = function() {
 						newWord.correctLetters.push(input.choice);
 					}
 				}
-				console.log("newWord", newWord.correctLetters);
-
 				self.reprint();
 			}
 		});
@@ -94,19 +92,14 @@ var Play = function() {
 	this.reprint = function() {
 		var noSpaces = currentWord.split("").filter(char => char !== " ");
 
-
-			console.log("currentWord", currentWord);
-			console.log("correctLttr length", newWord.correctLetters.length);
-			console.log("noSpaces word", noSpaces);
-			console.log("noSpaces length", noSpaces.length);
-
 		// Resets variables if word has been guessed correctly
 		if(newWord.correctLetters.length === noSpaces.length) {
+			console.log("Woohoo! Word was", currentWord);
+
 			currentWord = "";
 			newWord.correctLetters = [];
 			this.userGuesses = [];
 			noSpaces = "";
-			// this.letterArr = [];
 			this.selectWord();
 		} 
 		// Reprints word with already correctly guessed letters
