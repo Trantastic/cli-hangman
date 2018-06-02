@@ -12,7 +12,8 @@ var Play = function() {
 	var currentWord;
 
 	this.initiate = function() {
-		this.letterArr = newWord.correctLetters;
+		// this.letterArr = newWord.correctLetters;
+		newWord.correctLetters = [];
 		this.chosenWords = [];
 		this.userGuesses = [];
 		this.guessesLeft = 20;
@@ -73,9 +74,10 @@ var Play = function() {
 
 				for(var i = 0; i < currentWord.length; i++) {
 					if(input.choice === currentWordArr[i]) {
-						self.letterArr.push(input.choice);
+						newWord.correctLetters.push(input.choice);
 					}
 				}
+				console.log("newWord", newWord.correctLetters);
 
 				self.reprint();
 			}
@@ -90,15 +92,22 @@ var Play = function() {
 	};
 
 	this.reprint = function() {
-		var noSpaces = currentWord.split("").join("");
+		var noSpaces = currentWord.split("").filter(char => char !== " ");
+
+
+			console.log("currentWord", currentWord);
+			console.log("correctLttr length", newWord.correctLetters.length);
+			console.log("noSpaces word", noSpaces);
+			console.log("noSpaces length", noSpaces.length);
 
 		// Resets variables if word has been guessed correctly
-		if(this.letterArr.length === noSpaces.length) {
+		if(newWord.correctLetters.length === noSpaces.length) {
 			currentWord = "";
 			newWord.correctLetters = [];
-			this.letterArr = [];
+			this.userGuesses = [];
+			noSpaces = "";
+			// this.letterArr = [];
 			this.selectWord();
-			console.log("currentWord", currentWord);
 		} 
 		// Reprints word with already correctly guessed letters
 		else {
